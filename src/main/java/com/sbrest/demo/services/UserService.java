@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.sbrest.demo.dao.UserRepository;
 import com.sbrest.demo.entities.User;
+import com.sbrest.demo.exceptions.UserExistException;
+import com.sbrest.demo.exceptions.UserNotFoundException;
 
 @Service
-public class UserService {
+public class UserService  {
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -22,30 +24,45 @@ public class UserService {
 		
 	}
 	
-	public User createUser(User user) {
+	public User createUser(User user) throws UserExistException {
+		
+		if (getUserByUsername(user.getUserName())!=null) {
+			throw new UserExistException(" User already exist exception ");
+		}
 		return userRepo.save(user);
 	}
 	
-	public User getUserById(Long id) {
+	public User getUserById  (Long id) throws UserNotFoundException {
 		Optional<User> user= userRepo.findById(id);
+		if(user.isPresent()) {
 		return user.get();
+	}else {
+		throw new UserNotFoundException(" User is not present in the repository ");
+	}
 	}
 	
-	public User updateUserById (User user , Long id) {
-//		Optional<User> userToUpdate= userRepo.findById(id);
+	public User updateUserById (User user , Long id) throws UserNotFoundException{
+      Optional<User> userToUpdate= userRepo.findById(id);
+      
 //		return userToUpdate.get().s;
+      
+      if(userToUpdate.isPresent()) {
 		user.setId(id);
 		return userRepo.save(user);
 	}
+      else {
+    	  throw new UserNotFoundException("User is not present in the repository");
+      }
+	}
 	
-    public String deleteUserById(Long id) {
+    public String deleteUserById(Long id) throws UserNotFoundException {
     	
     	if (userRepo.findById(id).isPresent()) {
     	userRepo.deleteById(id);
     	return "User with "+id+" deleted";
     } 
     	else {
-    	return "User Does not Exist";
+    	throw new UserNotFoundException("User is not present for deletion");
     }
 }
     
