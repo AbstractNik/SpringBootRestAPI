@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity //(name="user")
 @Table(name="USERS")
@@ -14,9 +18,13 @@ public class User {
 	@Id
 	@GeneratedValue
     private Long id;
-	
+	@javax.validation.constraints.NotEmpty(message="User Name cannot be empty")
+	@Valid
 	@Column(name="USER_NAME" , length=50, nullable=false, unique=true)
 	private String userName;
+	
+	@Size(min=2, message="First Name should have at least 2 characters ")
+	@Valid
 	@Column(name="FIRST_NAME" , length=50, nullable=false)
 	private String firstName;
 	@Column(name="LAST_NAME" , length=50, nullable=false)
