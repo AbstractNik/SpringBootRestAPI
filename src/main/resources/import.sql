@@ -1,3 +1,10 @@
 INSERT INTO USERS VALUES ('101','nikhiltyagi2000@gmail.com','Nikhil','Tyagi','admin','ssn101','ntyagi')
 INSERT INTO USERS VALUES ('102','akhiltyagi2000@gmail.com','Akhil','Tyagi','admin','ssn102','atyagi')
 INSERT INTO USERS VALUES ('103','ankitatyagi2000@gmail.com','Ankita','Tyagi','admin','ssn103','antyagi')
+
+INSERT INTO ORDERS VALUES ('2001','order11','101')
+INSERT INTO ORDERS VALUES ('2002','order12','101')
+INSERT INTO ORDERS VALUES ('2003','order13','101')
+INSERT INTO ORDERS VALUES ('2004','order14','102')
+INSERT INTO ORDERS VALUES ('2005','order15','102')
+INSERT INTO ORDERS VALUES ('2006','order16','103')

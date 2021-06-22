@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,17 +29,18 @@ import com.sbrest.demo.services.UserService;
 
 @RestController
 @Validated
+@RequestMapping( value="/users")
 public class UserController {
 	
 	@Autowired
 private	UserService userService;
 	
-	@GetMapping("/users")
+	@GetMapping
 	public List<User> getAllUsers(){
 		return userService.getAllUsers();
 	}
 	
-	@PostMapping("/users")
+	@PostMapping
 	public ResponseEntity<Void> createUser( @Valid  @RequestBody User user,UriComponentsBuilder builder ) {
 		try {
 			userService.createUser(user);
@@ -50,7 +52,7 @@ private	UserService userService;
 		}
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public User getUserById(@PathVariable("id") @Min(1) Long id) {
 		try {
 			return userService.getUserById(id);
@@ -59,7 +61,7 @@ private	UserService userService;
 		}
 	}
 	
-	@PutMapping("/users/{id}")
+	@PutMapping("/{id}")
 	public User updateUserById (@RequestBody User user , @PathVariable("id")Long id)  {
 		
 		try {
@@ -69,7 +71,7 @@ private	UserService userService;
 		}
 //		
 	}
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/{id}")
 	public String deleteUserById(@PathVariable("id")Long id) {
 		
 		try {
@@ -81,7 +83,7 @@ private	UserService userService;
 		
 	}
 	
-	@GetMapping("/users/byuserName/{uname}")
+	@GetMapping("/byuserName/{uname}")
 	public User getUserByUsername(@PathVariable String uname) throws UserNameNotFoundException {
 		
 		if (userService.getUserByUsername(uname)!=null) {
