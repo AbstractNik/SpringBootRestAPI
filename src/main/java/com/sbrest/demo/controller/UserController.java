@@ -28,7 +28,7 @@ import com.sbrest.demo.exceptions.UserNotFoundException;
 import com.sbrest.demo.services.UserService;
 
 @RestController
-@Validated
+@Valid
 @RequestMapping( value="/users")
 public class UserController {
 	

@@ -13,10 +13,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity //(name="user")
 @Table(name="USERS")
-public class User {
+public class User extends RepresentationModel<User>{
 	
 	@Id
 	@GeneratedValue

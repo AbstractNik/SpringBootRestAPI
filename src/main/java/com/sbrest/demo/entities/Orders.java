@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="orders")
-public class Orders {
+public class Orders extends RepresentationModel<Orders> {
 	
 	@Id
 	@GeneratedValue
