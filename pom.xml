@@ -16,6 +16,9 @@
 	<properties>
 		<java.version>11</java.version>
 		 <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		 <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+		 
+		
 		</properties>
 	<dependencies>
 		<dependency>
@@ -60,14 +63,41 @@
 <groupId>org.springframework.boot</groupId>   
 <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
+<dependency>
+  <groupId>org.modelmapper</groupId>
+  <artifactId>modelmapper</artifactId>
+  <version>2.4.2</version>
+</dependency>
+
+<dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${org.mapstruct.version}</version>
+    </dependency>
+
+
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>${java.version}</source> <!-- depending on your project -->
+                <target>${java.version}</target> <!-- depending on your project -->
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${org.mapstruct.version}</version>
+                    </path>
+                    <!-- other annotation processors -->
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    
 		</plugins>
 	</build>
 
